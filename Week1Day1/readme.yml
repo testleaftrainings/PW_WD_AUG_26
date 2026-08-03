@@ -1,0 +1,84 @@
+Session Agenda Week1Day1
+
+1. Kickoff -                         40 min
+2. Break   -                         10 min
+3. Introduction to JavaScript -      40 min
+    Breakout for installation
+
+
+Notes:
+
+Introduction of JavaScript
+
+1. Evolution of JS
+2. Static vs Dynamic web application
+3. HTML, CSS and JS
+4. Client and Server side validation
+5. Browser Engine
+6. Foundation- Asynchronous, Event Driven, Non-Blocking I/O
+
+
+1. Evolution of JavaScript
+
+JavaScript was created by Brendan Eich in 1995 to make web pages interactive.
+used for web, server-side, and desktop application development.
+
+2. Static vs Dynamic Web Application
+
+A Static Web Application shows the same content to all users.
+A Dynamic Web Application changes content based on user actions or data.
+
+3. HTML, CSS, and JavaScript
+
+HTML creates the structure of a web page, and CSS styles it.
+JavaScript adds interactivity and functionality to the page.
+
+4. Client-Side and Server-Side Validation
+
+Client-side validation checks data in the browser before submission.
+Server-side validation checks data on the server for security and accuracy.
+
+5. Browser Engine and JavaScript Engine
+
+The Browser Engine displays web pages by processing HTML and CSS.
+The JavaScript Engine executes JavaScript code and makes web pages interactive.
+
+6. Foundation: Asynchronous, Event-Driven, Non-Blocking I/O
+
+Asynchronous means JavaScript can perform tasks without waiting for previous tasks to finish.
+Event-driven and non-blocking I/O help applications respond quickly to user actions 
+and external events.
+
+Code to check for Non-blocking I/O of JavaScript
+-------------------------------------------------
+
+console.log("Step1")
+setTimeout(()=>{console.log("Step2")},3000)
+console.log("Step3")
+
+🚦 Visual Timeline:
+SYNCHRONOUS:
+Task1: ██████████→
+Task2:              ████████→
+Task3:                       ████████→
+Time:  Total = Sum of all tasks
+
+ASYNCHRONOUS:
+Task1: ████████→
+Task2:    ████████→
+Task3:       ████████→
+Task4: ██→
+Time:  Total ≈ Longest task
+
+📊 Comparison Table
+=================================================================================
+Aspect	      ||	  Synchronous   	  ||		Asynchronous	||
+=================================================================================
+Execution		One at a time			Multiple in progress
+Waiting			Blocks until done		Non-blocking
+Order			Predictable (sequential)	Less predictable
+Performance		Slower for I/O			Faster for I/O
+Complexity		Simple to understand		Harder to manage
+Use case		Simple calculations		Network/files/timers
+
+-----------------------------------------------------------------------------
