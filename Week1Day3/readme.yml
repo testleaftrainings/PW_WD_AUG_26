@@ -1,0 +1,299 @@
+Session Agenda for Week1Day3
+
+1. Recap -                    5 min
+2. Hoisting and Scoping -     50 min
+3. Break-                     10 min
+4. Breakout-                  15 min
+5. Conditional Statements -   30 min
+Breakout
+
+
+
+Hoisting
+--------
+
+Hoisting is the default behavior of JavaScript where declarations are moved to the 
+top of their scope during the memory creation phase before execution.
+
+var -> Hoisted and initialized with undefined
+let-> Hoisted but not initialized → accessing before declaration gives ReferenceError (TDZ)
+const-> Hoisted but not initialized → accessing before declaration gives ReferenceError (TDZ)
+
+TDZ(Temporal dead zone)-> The time period between hoisting and initialization of a variable, where
+it cannot be accessed.
+
+
+Hoisting was introduced to provide coding flexibility by allowing function and variable declarations 
+to be recognized before their actual declaration during code execution.
+
+
+Scoping
+-------
+
+visibility or accessibility of the variable in the code.
+Scoping helps organize code by restricting where variables can be accessed
+
+Types of scope:
+--------------
+
+Global scope → accessible everywhere
+Function scope → accessible only inside a function
+Block scope → accessible only inside the block { }
+
+
+
+Conditional statements
+----------------------
+
+Conditional statements are used to make decisions in code.
+
+Based on a condition (true/false)
+JavaScript decides which block to execute
+
+types:
+------
+
+1) if ,  used for making decisions based on conditions.
+   if...else  -> used for conditions (>, <, ==, etc.), range and logic.
+   else if   
+
+if (condition) {
+  // code if condition is true
+} else {
+  // code if condition is false
+}
+
+2) Switch     -> used for multiple exact value comparisons or matching.
+ 
+A switch statement evaluates an expression and executes the matching case block.
+
+syntax:
+-------
+
+switch(expression) {
+  case value1:
+    // code
+    break;
+
+  case value2:
+    // code
+    break;
+
+  default:
+    // code if no match
+}
+
+The switch statement evaluates the expression once, compares it with each case using strict 
+comparison (===), executes the matching case block, uses break to stop further execution, and 
+if no match is found, the default block runs.
+
+Nested if:
+
+Nested if means one if statement inside another if statement.
+
+👉 We use nested if when the second condition should be checked only if the first condition is true.
+
+Syntax
+if (condition1) {
+
+    if (condition2) {
+        // Executes only if both conditions are true
+    }
+
+}
+Internal Working
+Start
+   │
+   ▼
+Check Condition 1
+   │
+ ┌─┴─────────────┐
+ │               │
+True           False
+ │               │
+ ▼               ▼
+Check         Skip inner if
+Condition 2      │
+ │               ▼
+┌┴───────┐      End
+│         │
+True    False
+│         │
+▼         ▼
+Execute   Skip
+
+Important:
+
+First, JavaScript checks the outer if.
+If it's false, it never checks the inner if.
+If it's true, then it checks the inner if.
+Real-Time Example 1: ATM Withdrawal
+
+Imagine you're withdrawing money from an ATM.
+
+Conditions
+Is the ATM card valid?
+Does the account have enough balance?
+
+Both must be true.
+
+let cardValid = true;
+let balance = 5000;
+let withdrawAmount = 2000;
+
+if (cardValid) {
+
+    console.log("Card verified");
+
+    if (balance >= withdrawAmount) {
+        console.log("Cash Withdrawn");
+    }
+
+}
+Output
+Card verified
+Cash Withdrawn
+
+Symbol DataType:
+
+What is Symbol?
+
+Symbol is a primitive data type introduced in ES6.
+
+👉 Simple Definition:
+
+Symbol is used to create a unique value (unique ID). Every time you create a Symbol, JavaScript gives you a new unique identity.
+
+Why do we need Symbol?
+
+Imagine a classroom.
+
+There are 2 students with the same name "Rahul".
+
+Rahul
+Rahul
+
+How will the teacher identify them?
+
+By giving a Roll Number.
+
+Rahul → Roll No: 101
+Rahul → Roll No: 102
+
+Even though the names are the same, the Roll Numbers are unique.
+
+👉 Symbol works exactly like a Roll Number.
+
+Example 1
+const s1 = Symbol();
+const s2 = Symbol();
+
+console.log(s1 === s2);
+Output
+false
+Why?
+
+Every call to Symbol() creates a brand-new unique value.
+
+s1 → Unique ID #101
+
+s2 → Unique ID #102
+
+So,
+
+s1 !== s2
+Example 2
+const id1 = Symbol("id");
+const id2 = Symbol("id");
+
+console.log(id1 === id2);
+Output
+false
+
+Even though both have "id" as the description, they are still different.
+
+Reason:
+
+The text "id" is only a label for debugging. It is not the Symbol's actual value.
+
+Real-Time Example
+
+Suppose you have an employee object.
+
+const employee = {
+    name: "Yuvarani"
+};
+
+You add an ID.
+
+employee.id = 101;
+
+Later another developer writes:
+
+employee.id = 500;
+
+Now the original value is lost.
+
+id = 500
+
+❌ The old value (101) was overwritten.
+
+Using Symbol
+const empId = Symbol("id");
+
+const employee = {
+    name: "Yuvarani",
+    [empId]: 101
+};
+
+console.log(employee[empId]);
+Output
+101
+
+Now this property is unique because the key is a Symbol.
+
+Another developer cannot accidentally overwrite it unless they have the same Symbol reference.
+
+Why Square Brackets []?
+const id = Symbol();
+
+const user = {
+    [id]: 101
+};
+
+[] tells JavaScript:
+
+"Use the value stored in the variable as the property key."
+
+Without brackets:
+
+const user = {
+    id: 101
+};
+
+Here "id" is just a normal string property, not a Symbol.
+
+When Do We Use Symbol?
+
+Use Symbol when you want:
+
+✅ A unique value every time.
+✅ To avoid property name conflicts.
+✅ To add hidden metadata to an object without clashing with existing keys.
+Easy Interview Definition
+
+Symbol is a primitive data type in JavaScript that creates a unique value every time it is called. It is mainly used as a unique object property key to avoid property name conflicts.
+
+Easy Memory Trick
+
+Imagine your Aadhaar number.
+
+👤 Many people can have the same name.
+🆔 But Aadhaar number is unique for every person.
+
+Similarly:
+
+"id" (string) → Like a name (can be duplicated).
+Symbol("id") → Like an Aadhaar number (always unique).
+
+That's the easiest way to remember Symbol.
