@@ -1,0 +1,182 @@
+Session Agenda for Week1 Day4
+
+1. Recap -                    5 min
+2. Operators -                30 min
+3. Looping Statements -       30 min
+4. Breakout-                  20 min
+5. Strings in JavaScript -    35 min
+
+
+Operators:
+----------
+
+Operators are special symbols used to perform operations on values (operands)
+
+1) Arithmetic Operators: Used for mathematical calculations.
+
+ex:
+10 + 5   // 15 (addition)
+10 - 5   // 5  (subtraction)
+10 * 5   // 50 (multiplication)
+10 / 5   // 2  (division)
+10 % 3   // 1  (remainder)
+
+Use: calculations like age, marks, salary
+
+2) Assignment Operators: Used to assign values to variables
+
+ex:
+let x = 10;   // assign
+x += 5;       // x = x + 5 → 15
+x -= 2;       // x = x - 2 → 13
+x *= 2;       // x = x * 2 → 26
+x /= 2;       // x = x / 2 → 13
+
+Use: updating values
+
+3) Comparison Operators: Used to compare values (returns true/false)
+
+10 == "10"   // true  (Loose equality, checks only the value)
+10 === "10"  // false (Strict equality , checks both value + data type)
+
+10 != 5      // true
+10 > 5       // true
+10 < 5       // false
+10 >= 10     // true
+10 <= 9      // false
+
+Use: conditions in if/else
+
+4. Logical Operators: Used to combine multiple conditions.
+
+true && true   // true  (AND)
+true || false  // true  (OR)
+!true          // false (NOT)
+
+ex:
+age >= 18 && age <= 60
+
+Use: multiple condition checks
+
+5. Unary Operators (Increment / Decrement) : Unary operators work on single operand.
+
+Pre-increment ->increments first and then assign
+++a
+
+ex: 
+let a = 5;
+console.log(++a)
+
+Post-increment-> use first and then increment
+a++
+
+let x = 10;
+console.log(x++);
+console.log(x)
+
+Pre-decrement -> ->decrement first and then assign
+--d
+
+ex: 
+let d = 5;
+console.log(--d)
+console.log(d)
+
+Post decrement -> use first and then decrement
+c--
+
+ex:
+let c = 5;
+console.log(c--);
+console.log(c);
+
+use: used in clicks, steps, iterations
+
+
+| Type  | Action         | Output behavior      |
+| ----- | -------------- | -------------------- |
+| `++i` | increase first | prints updated value |
+| `i++` | use first      | prints old value     |
+
+
+Looping statements
+------------------
+
+Looping statements are used to execute a block of code repeatedly based on a condition.
+
+1) For Loop : used when we know the iterations in advance
+
+syntax:
+-------
+
+for (initialization; condition; increment/decrement) { 
+//code to execute 
+}  
+
+Ex: Used to iterate through all the options in a dropdown.
+
+    
+2) while Loop : A while loop is used when the number of iterations is unknown, and execution 
+continues as long as the given condition is true
+
+syntax:
+-------
+
+while (condition) {
+  // code to execute
+}
+
+Ex: 
+
+while(hasNextPage){
+await page.locator(`.navgbutton`).click()
+hasNextPage = await page.locator(`.navgbutton`).isEnabled() // Here verification 
+} 
+
+3) Do-while: do...while is a loop that executes the code block at least once and then checks the 
+condition
+
+syntax:
+-------
+do {
+    
+} while (condition);
+
+Ex: user login, ATM pin
+do {
+    // Ask the user to enter username and password
+
+    // Validate the entered credentials
+
+} while (credentials are invalid);
+
+Used to retry the login process until valid credentials are entered, ensuring the login screen is
+displayed at least once before validating the credentials.
+
+Classroom Activity:
+-------------------
+
+Write a JavaScript function named `printOddNumbers` that prints odd numbers between 1 and 25
+
+
+strings : Sequence of characters
+-------
+
+1. String Literal
+
+string literal is a string value written directly in the code
+
+ex: let name = "John";
+    let city = 'Chennai';
+    let greeting = `Welcome`;
+
+2. String objects
+
+A String object is a string created using the new String() constructor.
+
+ex: let str = new String("Hello");
+
+--------------
+
+
+
