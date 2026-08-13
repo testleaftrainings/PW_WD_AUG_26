@@ -1,0 +1,86 @@
+Session Agenda for Week2 Day4
+
+Playwright Basics
+Breakout
+break
+Playwright config file walk through
+
+Async-await
+-----------
+
+//2017 ->async/await -> playwright
+//await => promise
+
+ex:
+
+async function data(){
+
+await page.goto("url")
+await page.locator("username").fill("demomanager")
+
+}
+
+`async/await` is a cleaner way to handle Promises in JavaScript.
+
+* `async` keyword defines a function that returns a Promise.
+* `await` pauses execution until the Promise is resolved or rejected.
+
+Example
+await page.goto("https://google.com");
+await page.click("text=Gmail");
+
+Page Fixture:
+-------------
+
+Built-in object (page) provided by the test runner to interact with a browser page 
+(open URL, click, type, etc.)
+
+No need to create browser/page manually, it is automatically handled by the test runner.
+
+syntax:
+-------
+
+test('title', async ({ page }) => {
+  await page.goto('https://www.google.com/'); // using page fixture
+});
+
+
+Internally(page fixture implementation):
+---------------------------------------
+test('title', async () => {
+const browser = await chromium.launch();
+const context = await browser.newContext();
+const page = await context.newPage();
+await page.goto('https://www.google.com/')
+})
+
+Playwright Config File:
+-----------------------
+
+A configuration file (playwright.config.ts) that defines settings for running tests
+such as test directory, timeout, browser options, etc.
+
+It allows you to customize the test environment and behavior.
+
+
+reporter:[['html', { open: 'always' }]],
+
+use:
+
+trace: 'on',
+video: 'on',
+screenshot:'on',
+headless: false,
+
+Projects: 
+
+  {
+    name: 'chrome',
+    use: {
+      channel: 'chrome',
+      viewport: null,
+      launchOptions: {
+        args: ['--start-maximized'],
+      },
+    },
+  },
