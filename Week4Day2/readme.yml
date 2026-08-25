@@ -1,0 +1,120 @@
+📑 Agenda for Week4 day 02-Type Alias and Enumeration
+
+Object literal
+Type Alias(Union and Intersection)
+Breakout
+Enum
+
+
+Object Literal:
+---------------
+
+An object literal is a direct way of creating an object using key-value pairs enclosed within curly
+braces {}
+
+object testData
+
+let testData = {
+  username: "admin",  //key:value pair
+  password: "admin123",
+  role: "QA"
+};
+
+usage:
+------
+await page.fill("#username", testData.username);
+await page.fill("#password", testData.password);
+
+
+type Alias:
+-----------
+
+A type alias in TypeScript is a way to create a new name for an existing type. It allows you to 
+define a custom type that can be used throughout your codebase, making it easier to manage and 
+maintain complex types.
+
+type user ={
+firstname : string
+lastname : string
+mobnumber : number
+}
+
+let user1 :user ={firstname : 'sekar', lastname: 'y', mobnumber:987656778}
+let user2 :user={firstname : 'sruthi', lastname: 'r', mobnumber:807656770}
+
+
+types:
+------
+
+1. Union types
+2. Intersection types
+
+Union Types
+-----------
+
+Union Type allows a variable, parameter, or property to hold more than one type or value.
+
+type Id = string | number   
+
+let userId: Id;
+
+userId = "EMP101";   // valid
+userId = 1001;       // valid
+userId= true  //not valid
+
+console.log(userId) //1001
+
+Type Intersection
+-----------------
+
+Intersection type combines multiple types into one, meaning the value must satisfy all the types 
+together.
+
+ex:
+type User = { name: string }
+
+type Contact = { phone: number }
+
+type UserContact = User & Contact
+
+let UserContactdetails:UserContact={
+name:"Anitha",
+phone: 735808765
+}
+
+console.log(UserContactdetails.phone) //735808765
+
+
+Enum/Enumeration
+-----------------
+enum is a feature in TypeScript that allows you to define a set of named constants.
+
+enum types:
+----------
+Numeric enum(default)
+String enum
+Heterogenious enum
+
+Ex:
+enum environment{
+qa
+prod
+}
+
+let env:environment=environment.qa
+console.log(env)
+ Classroom activity
+ -----------------
+
+ 1.Create a TypeScript program to handle different payment methods using a Union Type.
+
+- Create a function that accepts only specific payment methods.
+
+
+
+- Create a type alias called PaymentMethod that allows only "UPI", "CreditCard", or "PayPal".
+
+- Write a function makePayment that takes a parameter of type PaymentMethod and prints which payment
+  method is chosen.
+
+- Call the function with "UPI" and "CreditCard" as arguments.
