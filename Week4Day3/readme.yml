@@ -1,0 +1,176 @@
+📑 Agenda for Week 4 day 03 : Alerts and Frames
+
+Recap
+Alerts
+break
+Frames
+breakout
+
+
+optional parameter:
+------------------
+
+An optional parameter allows a function to accept an argument optionally; if it isn't passed, its 
+value is undefined.
+
+function greet(name: string, city?: string) {
+  console.log(`Hello ${name}`);
+}
+
+greet("Bala");            
+greet("Bala", "Chennai"); 
+
+
+Alerts /Dialogs:
+---------------
+
+Alerts are pop-up or dialog boxes that appear on the browser to get user attention or input.
+
+types
+-----
+
+a) Modal alerts(not inspectable)
+--------------------------------
+
+A modal dialog forces the user to interact with it before returning to the application.
+
+Blocks the webpage
+Prevents interaction with background content
+Requires immediate response
+
+
+1) simple-ok
+ex: alert("Login Successful")
+
+2) confirmation-ok and cancel
+ex: confirm("Are you sure?")
+
+3) prompt-ok, cancel and input textbox
+ex: prompt("Enter your name")
+
+
+b) Non modal alerts (inspectabe)
+--------------------------------
+
+A non-modal dialog does not block the application.
+
+User can continue interacting with the page
+Can stay open while working
+
+1) Sweet-dismiss
+
+ex: Need help?,  //can be ignored.
+
+
+Syntax:
+-------
+
+page.on('dialog', async dialog => { ... }) → Listen and handle.
+
+await dialog.accept([promptText]) → Accept dialog (optionally providing input for prompts).
+await dialog.dismiss() → Cancel dialog.
+
+Event Listeners
+--------------
+An event listener is a function that waits for a specific event (like click, input, alert) and 
+executes code when that event happens.
+
+Syntax: page.on(eventName, callback) or page.once(eventName, callback)
+
+------------------------------------------------------------------------------------
+
+page.once()
+---------
+
+page.once() registers an event listener that runs only the first time the event occurs, then it 
+automatically stops listening.
+
+page.once('eventName', async (event) => {
+   // handle event
+});
+
+
+page.on()
+---------
+page.on() registers an event listener that will run every time the event occurs.
+
+//Handles all the alerts in the page.
+
+page.on('eventName', async (event) => {
+   // handle event
+});
+
+
+Classroom 1: 
+
+Launch the URL: https://www.leafground.com/alert.xhtml
+Click on Prompt Dialog.
+Switch to the JavaScript prompt alert.
+Enter a value using accept("Playwright").
+
+
+Frames:
+-------
+
+An HTML document embedded inside another document using an <iframe> tag. Playwright allows direct 
+interaction with elements inside frames.
+
+
+Frame:
+//iframe -> dom (to view frames)
+view Frame source -> right click
+
+
+Types of Frame
+---------------
+
+1. single Frame
+2. Nested Frame (Frame present inside another frame)
+
+
+ways to handle iFrame:
+------------------------
+
+1) index based - switch to frame with index 
+
+index starts from '0', main page is also considered as a frame at index 0
+ //mP->0 ,f1->1,f2->2,f3->3,f4->4  and so on
+
+ex: 
+const frames = page.frames();
+const frame1 = frames[1];
+await frame1.locator("#Click").click()
+
+
+2) FrameLocator - Locate the frame first and then perform the action
+//FrameLocator().locator().click()
+
+ex:
+await page.frameLocator("(//iframe)[1]").locator("#Click").click()
+
+
+3) FrameObject- get the frame using name, URL, or other properties.
+
+await page.frame({url:'https://www.leafground.com/default.xhtml'})?.locator("#Click").click()
+or
+const frame = page.frame({ url: 'https://www.leafground.com/default.xhtml'});
+await frame?.locator("#Click").click()
+
+
+Optional chaining (?.) allows safe access to properties or methods by returning undefined instead of
+throwing an error when the object is null or undefined.
+
+?. => optional chaining (checks if value exists - not null/undefined)
+   if (frame) {
+      await frame.locator("#Click").click()
+   }
+
+methods()
+---------
+
+page.frames()-> frames() method helps to get the collection of frames that is present in a webpage.
+
+page.frame({ name | url }) → Gets the frame object to interact with webelement.
+
+page.frameLocator(selector) → Locates elements inside a frame (recommended).
+
