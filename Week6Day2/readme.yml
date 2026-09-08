@@ -1,0 +1,205 @@
+📑 Agenda for Week6 Day2 - Polymorphism and Abstraction
+
+Polymorphism
+Method Overloading
+Method overridding
+Breakout
+Abstraction
+Interface
+
+Polymorphism: Polymorphism is the ability of a method to have different behaviors
+ based on the context or class.
+
+polymorphism->many+forms
+
+types:
+------
+
+1) Method overloading(compile time polymorphism)
+2) Method overriding(runtime polymorphism)
+
+
+Method overloading:
+------------------
+
+Method Overloading means having multiple methods with the same name but different parameters 
+(type, number, or order).
+It allows the same method name to perform different actions based on the input.
+
+TypeScript supports method overloading only at the type level (signatures), not true runtime 
+overloading like Java.
+You can declare multiple method signatures, But only one actual implementation is allowed
+
+
+class Calculator {
+  add(a: number, b: number): number;  //signature
+  add(a: string, b: string): string;  //signature
+
+  // single implementation-1
+  add(a: any, b: any): any {
+    return a + b;
+  }
+}
+
+or
+
+//single implementation-2
+add(a: number | string, b: number | string): number | string {
+
+if (typeof a === "number" && typeof b === "number") {
+return a + b;
+ } else {
+  return a.toString() + b.toString();
+ }
+ }
+
+const c = new Calculator();
+console.log(c.add(5, 10));       // 15
+console.log(c.add("Hi ", "All"))// Hi All
+
+
+
+Method overriding:
+------------------
+Method overriding is achieved using inheritance, where a child class provides its own implementation
+for a method with the same name and parameters as defined in the parent class.
+
+//Different browsers behave differently
+
+class Browser {
+    launch() {
+        console.log("Launching browser");
+    }
+}
+
+class Chrome extends Browser {
+    launch() {
+        console.log("Launching Chrome browser");
+    }
+}
+
+class Edge extends Browser {
+    launch() {
+        console.log("Launching Edge browser");
+    }
+}
+
+new Chrome().launch();
+
+a->b
+->c
+
+
+
+Classroom 1: Method overloading and Method overriding
+
+Overloading
+Create a class TextBox and implement method overloading for fill() with the following signatures:
+
+fill(text: string)
+fill(text: string, locator: string)
+Ensure a single implementation handles both cases appropriately.
+
+Overriding
+Create a parent class Browser with a method browserVersion().
+Create a child class Chrome that overrides browserVersion() and prints a specific browser version.
+
+
+Abstraction:
+------------
+
+Abstraction means hiding implementation details and showing only essential functionality
+
+Reduce complexity
+Improves maintainability
+
+Ex: we use click and fill methods in the Automation Script
+  Abstraction is achieved by hiding locators and low-level implementation inside classes
+  (abstract/base classes) and exposing only business-level methods like login(), search().
+
+
+
+Abstraction-> contains interface, abstract class, concrete/normal class
+
+Interface -> fully abstract method -> we cannot have implemented methods
+interface can only extend another interface
+
+abstract class -> partial implementation-> contains both implemented and unimplemented methods
+0 to 100% abstract method
+we cannot create object for the abstract class
+we use abstract keyword followed by abstract class and abstract methods
+abstract class can extend another abstrace class
+abstract class can implement interface
+ 
+ EX:
+
+abstract class BasePage {
+    abstract login(user: string, pass: string): void;
+}
+
+class LoginPage extends BasePage {
+
+    login(user: string, pass: string): void {
+        console.log("Fill username");
+        console.log("Fill password");
+        console.log("Click login");
+    }
+}
+
+let page = new LoginPage();
+page.login("admin", "123");
+
+
+
+ClassRoom: 2
+
+create abstract class 
+fill() -> implement
+clear()->implement
+locator()-> unimplement
+frame() -> unimplement
+
+create another concrete class 
+-> implement methods
+-> create object and call the methods
+
+ 
+ Interface:
+----------
+
+Interface is a contract that defines the structure of methods and properties, and its implementation
+is provided by the class that implements it.
+
+Ex: interface Login {
+    login(): void;
+}
+
+class User implements Login {
+    login() {
+        console.log("Login successful");
+    }
+}
+
+let obj = new User();
+obj.login();
+
+>> Difference between Abstract and Interface:
+
+
+| Feature         | Abstract Class                           | Interface                               |
+| --------------- | ---------------------------------------- | --------------------------------------- |
+| Purpose         | Partial abstraction                      | Full abstraction                        |
+| Methods         | Can have implemented + abstract methods  | Only method declarations                |
+| Properties      | Can have variables with values           | Only declarations (no values)           |
+| Inheritance     | Class can extend only one abstract class | Class can implement multiple interfaces |
+| Keywords        | `extends`                                | `implements`                            |
+| Object Creation | Cannot create object                     | Cannot create object                    |
+| Use Case        | When common logic is needed              | When only rules/structure needed        |
+
+
+Classroom 3:
+
+Create an interface Payment with payment method
+pay(amount: number): void
+create 3 classes with UPI,CreditCard and NetBanking
+each class should implement payment method and provide its own implementation
