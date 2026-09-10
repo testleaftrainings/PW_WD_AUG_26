@@ -1,0 +1,111 @@
+📑 Agenda for Week6 Day4 - Wrapper Method and Custom Fixture
+
+POM(Page object model)
+break
+Custom Fixture
+Wrapper Method
+Breakout
+
+
+Custom Fixture:
+---------------
+
+A custom fixture is a user-defined fixture that extends Playwright's built-in fixtures 
+like page, browser, and context to provide custom setup, data, objects, or functionality to 
+your tests
+
+Custom fixture = A reusable setup or functionality that we create on top of Playwright's built-in 
+fixtures.
+
+syntax:
+-------
+
+//custom fixture:
+
+import { test as base } from "@playwright/test";
+
+export const test = base.extend<{
+    loginPage: LoginPage;
+}>({
+    loginPage: async ({ page }, use) => {
+        const loginPage = new LoginPage(page);
+        await use(loginPage);
+    }
+});
+
+
+//use the Custom fixture "loginPage" in the test (instead of page fixture)
+
+import { test } from "./customFixture";
+
+test("Login test", async ({ loginPage }) => {
+    await loginPage.login("user", "password");
+});
+
+
+Playwright built-in fixture
+          ↓
+        page
+          ↓
+   Custom fixture
+          ↓
+      loginPage
+          ↓
+       Test
+
+
+Wrapper Method:
+---------------
+
+A wrapper method is a method that encapsulates an existing method or multiple operations 
+and may add additional logic, making the functionality reusable and easier to maintain.
+
+ex:
+Suppose you repeatedly use this:
+--------------------------------
+
+await page.getByRole("button", { name: "Login" }).click();
+
+It can be created as wrapper method:
+-----------------------------------
+
+async function clickLogin(page) {
+    console.log("Clicking Login button")
+    await page.getByRole("button", { name: "Login" }).click();
+}
+
+so that we can simply use,
+await clickLogin(page)
+
+Features:
+---------
+
+Reusability 
+Maintainability
+
+
+Installation commands:
+----------------------
+
+dotenv :  npm install dotenv
+import dotenv from "dotenv"
+
+faker library: npm install @faker-js/faker
+import {faker} from "@faker-js/faker"
+
+Faker is a test-data generation library used to create realistic, dynamic data instead of hard-coding
+test values
+faker comes from the @faker-js/faker npm package(external)
+
+ex:
+faker.person.firstName()
+faker.person.lastName()
+faker.company.name()
+faker.company.buzzNoun()
+faker.internet.email()
+faker.phone.number()
+faker.location.city()
+faker.location.country()
+
+
+
