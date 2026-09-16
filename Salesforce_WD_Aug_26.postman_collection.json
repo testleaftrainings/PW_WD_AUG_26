@@ -1,0 +1,243 @@
+{
+  "info": {
+    "_postman_id": "f65d4454-9c94-405e-9767-58fe8c4ed5e0",
+    "name": "Salesforce_WD_Aug_26",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56911264",
+    "_collection_link": "https://go.postman.co/collection/56911264-f65d4454-9c94-405e-9767-58fe8c4ed5e0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Generate_Token",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "password",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "3MVG9dAEux2v1sLsRvdqMCBNvwP6WkblcP70V_xpRK5jeueAyURhV5.EcbUmH8rTcnkf0q2Ko.bpsQDul4vOG",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "926CE4EE9D6F27F1C1853ACCCAEE9A2902BC98C4848C7B6CEB2B1D936D48A5DD",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "yuvarani.sekar@testleaf.com",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "TestLeaf@2026",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://login.salesforce.com/services/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "login",
+            "salesforce",
+            "com"
+          ],
+          "path": [
+            "services",
+            "oauth2",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create_Lead",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "00DgL000008vBTZ!AQEAQAHLBeEUBcBEXnsMUiGYCJ5NSgLbngr5p49gmAlmhjTuVIkkKSo7LFlZE3jx7o7rNXBA3_JfWaUnlvYzNPVSK6h5pAkL",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"Salutation\":\"ms\",\r\n    \"FirstName\":\"yuva\",\r\n    \"LastName\":\"sekar\",\r\n    \"Company\":\"Tata\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://orgfarm-d716fa5b16-dev-ed.develop.my.salesforce.com/services/data/v65.0/sobjects/Lead",
+          "protocol": "https",
+          "host": [
+            "orgfarm-d716fa5b16-dev-ed",
+            "develop",
+            "my",
+            "salesforce",
+            "com"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Featch_lead",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "00DgL000008vBTZ!AQEAQAHLBeEUBcBEXnsMUiGYCJ5NSgLbngr5p49gmAlmhjTuVIkkKSo7LFlZE3jx7o7rNXBA3_JfWaUnlvYzNPVSK6h5pAkL",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://orgfarm-d716fa5b16-dev-ed.develop.my.salesforce.com/services/data/v65.0/sobjects/Lead/00QgL00000czlQjUAI",
+          "protocol": "https",
+          "host": [
+            "orgfarm-d716fa5b16-dev-ed",
+            "develop",
+            "my",
+            "salesforce",
+            "com"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead",
+            "00QgL00000czlQjUAI"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update_request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "00DgL000008vBTZ!AQEAQAHLBeEUBcBEXnsMUiGYCJ5NSgLbngr5p49gmAlmhjTuVIkkKSo7LFlZE3jx7o7rNXBA3_JfWaUnlvYzNPVSK6h5pAkL",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Company\":\"Testleaf\"  \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://orgfarm-d716fa5b16-dev-ed.develop.my.salesforce.com/services/data/v65.0/sobjects/Lead/00QgL00000czlQjUAI",
+          "protocol": "https",
+          "host": [
+            "orgfarm-d716fa5b16-dev-ed",
+            "develop",
+            "my",
+            "salesforce",
+            "com"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead",
+            "00QgL00000czlQjUAI"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete_Lead",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "00DgL000008vBTZ!AQEAQAHLBeEUBcBEXnsMUiGYCJ5NSgLbngr5p49gmAlmhjTuVIkkKSo7LFlZE3jx7o7rNXBA3_JfWaUnlvYzNPVSK6h5pAkL",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://orgfarm-d716fa5b16-dev-ed.develop.my.salesforce.com/services/data/v65.0/sobjects/Lead/00QgL00000czlQjUAI",
+          "protocol": "https",
+          "host": [
+            "orgfarm-d716fa5b16-dev-ed",
+            "develop",
+            "my",
+            "salesforce",
+            "com"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead",
+            "00QgL00000czlQjUAI"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
