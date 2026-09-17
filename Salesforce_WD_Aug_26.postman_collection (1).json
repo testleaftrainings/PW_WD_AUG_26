@@ -1,0 +1,246 @@
+{
+  "info": {
+    "_postman_id": "f65d4454-9c94-405e-9767-58fe8c4ed5e0",
+    "name": "Salesforce_WD_Aug_26",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56911264",
+    "_collection_link": "https://go.postman.co/collection/56911264-f65d4454-9c94-405e-9767-58fe8c4ed5e0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Generate_Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nlet responseBody = pm.response.json()\r\n\r\nlet acc_token = responseBody.access_token\r\nconsole.log(acc_token)\r\n\r\npm.globals.set(\"Salesforceaccess_Token\",acc_token)\r\n\r\nlet inst_url = responseBody.instance_url\r\nconsole.log(inst_url)\r\n\r\npm.collectionVariables.set(\"S_instance_U\",inst_url)\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials"
+            },
+            {
+              "key": "client_id",
+              "value": "3MVG9dAEux2v1sLsRvdqMCBNvwP6WkblcP70V_xpRK5jeueAyURhV5.EcbUmH8rTcnkf0q2Ko.bpsQDul4vOG"
+            },
+            {
+              "key": "client_secret",
+              "value": "926CE4EE9D6F27F1C1853ACCCAEE9A2902BC98C4848C7B6CEB2B1D936D48A5DD"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://orgfarm-d716fa5b16-dev-ed.develop.my.salesforce.com/services/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "orgfarm-d716fa5b16-dev-ed",
+            "develop",
+            "my",
+            "salesforce",
+            "com"
+          ],
+          "path": [
+            "services",
+            "oauth2",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create_Lead",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\nconst response = pm.response.json()\r\n\r\nlet id = response.id\r\nconsole.log(id)\r\n\r\npm.environment.set(\"L_id\",id)"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{Salesforceaccess_Token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"Salutation\":\"ms\",\r\n    \"FirstName\":\"yuva\",\r\n    \"LastName\":\"sekar\",\r\n    \"Company\":\"Tata\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{S_instance_U}}/services/data/v65.0/sobjects/Lead",
+          "host": [
+            "{{S_instance_U}}"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Featch_lead",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{Salesforceaccess_Token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{S_instance_U}}/services/data/v65.0/sobjects/Lead/{{L_id}}",
+          "host": [
+            "{{S_instance_U}}"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead",
+            "{{L_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update_request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{Salesforceaccess_Token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"Company\":\"Testleaf\"  \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{S_instance_U}}/services/data/v65.0/sobjects/Lead/{{L_id}}",
+          "host": [
+            "{{S_instance_U}}"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead",
+            "{{L_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete_Lead",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{Salesforceaccess_Token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{S_instance_U}}/services/data/v65.0/sobjects/Lead/{{L_id}}",
+          "host": [
+            "{{S_instance_U}}"
+          ],
+          "path": [
+            "services",
+            "data",
+            "v65.0",
+            "sobjects",
+            "Lead",
+            "{{L_id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "instance",
+      "value": ""
+    },
+    {
+      "key": "inst",
+      "value": ""
+    },
+    {
+      "key": "S_instance_U",
+      "value": ""
+    }
+  ]
+}
