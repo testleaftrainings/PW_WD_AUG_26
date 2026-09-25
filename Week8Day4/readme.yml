@@ -1,0 +1,73 @@
+📑 Agenda for Week8 Day4 - 
+
+Playwright Hybrid Framework.
+
+Basic understanding of Playwright Hybrid Framework:
+
+Framework Walkthrough
+Page Object Model (POM) Implementation
+Test Structure and Organization 
+Test Execution and Reporting
+Best Practices and Tips for Playwright Hybrid Framework
+
+
+Note: This agenda is designed to provide a comprehensive overview of the Playwright Hybrid Framework
+,covering its key components and best practices for effective test automation. 
+
+
+Folder structure:
+-----------------
+
+data-> hold all the data files
+utility-> wrapper methods under helpers folder ex: api, ui, fixtures
+page -> classes
+test->for execurting the test cases
+reports-> to have timestamp and html report
+
+Dependencies/libraries:
+-----------------------
+
+PW installation/configuration 
+npm init playwright@latest
+
+node version
+npm -v
+
+typescript config file
+tsconfig.json -> tsc --init
+
+Data parameterization:
+----------------------
+
+csv-> npm install csv-parser
+env->npm install dotenv
+axios-> npm insall axios
+faker-> npm install @faker-js/faker
+excel-> npm install xlsx
+path-> npm install path
+fs-> npm install fs
+
+
+steps to run the framework:
+---------------------------
+
+1) Import the framework
+
+2) install node modules by running command "npm install" from root directory.
+
+Step 1: Install Faker
+
+Run:
+
+npm install @faker-js/faker
+
+Verify installation:
+
+npm list @faker-js/faker
+Step 2: Import Faker
+import { faker } from '@faker-js/faker';
+Step 3: Generate Data
+Full Name
+const fullName = faker.person.fullName();
+
+console.log(fullName);
